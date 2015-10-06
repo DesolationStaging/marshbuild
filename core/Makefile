@@ -830,7 +830,7 @@ else
 recovery_fstab := $(strip $(wildcard $(TARGET_DEVICE_DIR)/recovery.fstab))
 endif
 # Named '.dat' so we don't attempt to use imgdiff for patching it.
-RECOVERY_RESOURCE_ZIP := $(TARGET_OUT)/etc/recovery-resource.dat
+#RECOVERY_RESOURCE_ZIP := $(TARGET_OUT)/etc/recovery-resource.dat
 
 ifeq ($(recovery_resources_private),)
   $(info No private recovery resources for TARGET_DEVICE $(TARGET_DEVICE))
@@ -1038,17 +1038,17 @@ SYSTEMIMAGE_SOURCE_DIR := $(TARGET_OUT)
 # as the source (since they are very similar).  Generate the patch so
 # we can see how big it's going to be, and include that in the system
 # image size check calculation.
-ifneq ($(INSTALLED_RECOVERYIMAGE_TARGET),)
-intermediates := $(call intermediates-dir-for,PACKAGING,recovery_patch)
-RECOVERY_FROM_BOOT_PATCH := $(intermediates)/recovery_from_boot.p
-$(RECOVERY_FROM_BOOT_PATCH): $(INSTALLED_RECOVERYIMAGE_TARGET) \
-                             $(INSTALLED_BOOTIMAGE_TARGET) \
-			     $(HOST_OUT_EXECUTABLES)/imgdiff \
-	                     $(HOST_OUT_EXECUTABLES)/bsdiff
-	@echo -e ${CL_CYN}"Construct recovery from boot"${CL_RST}
-	mkdir -p $(dir $@)
-	PATH=$(HOST_OUT_EXECUTABLES):$$PATH $(HOST_OUT_EXECUTABLES)/imgdiff $(INSTALLED_BOOTIMAGE_TARGET) $(INSTALLED_RECOVERYIMAGE_TARGET) $@
-endif
+#ifneq ($(INSTALLED_RECOVERYIMAGE_TARGET),)
+#intermediates := $(call intermediates-dir-for,PACKAGING,recovery_patch)
+#RECOVERY_FROM_BOOT_PATCH := $(intermediates)/recovery_from_boot.p
+#$(RECOVERY_FROM_BOOT_PATCH): $(INSTALLED_RECOVERYIMAGE_TARGET) \
+#                             $(INSTALLED_BOOTIMAGE_TARGET) \
+#			     $(HOST_OUT_EXECUTABLES)/imgdiff \
+#	                     $(HOST_OUT_EXECUTABLES)/bsdiff
+#	@echo -e ${CL_CYN}"Construct recovery from boot"${CL_RST}
+#	mkdir -p $(dir $@)
+#	PATH=$(HOST_OUT_EXECUTABLES):$$PATH $(HOST_OUT_EXECUTABLES)/imgdiff $(INSTALLED_BOOTIMAGE_TARGET) $(INSTALLED_RECOVERYIMAGE_TARGET) $@
+#endif
 
 
 $(INSTALLED_SYSTEMIMAGE): $(BUILT_SYSTEMIMAGE) $(RECOVERY_FROM_BOOT_PATCH) | $(ACP)
