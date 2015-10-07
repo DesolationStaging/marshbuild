@@ -589,7 +589,7 @@ else if get_stage("%(bcb_dev)s") == "3/3" then
                      ""+input_zip.read("SYSTEM/bin/backuptool.functions"))
     script.Mount("/system")
     script.RunBackup("backup")
-    script.Unmount("/system")
+    #script.Unmount("/system")
 
   system_progress = 0.75
 
