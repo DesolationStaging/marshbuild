@@ -65,6 +65,8 @@ endif # CALLED_FROM_SETUP
 ifneq ($(PRINT_BUILD_CONFIG),)
 HOST_OS_EXTRA:=$(shell python -c "import platform; print(platform.platform())")
 $(info =======================================================)
+$(info =================Desolation Domination=================)
+$(info =======================================================)
 $(info   HOST_ARCH=$(HOST_ARCH))
 $(info   HOST_OS=$(HOST_OS))
 $(info   HOST_BUILD_TYPE=$(HOST_BUILD_TYPE))
