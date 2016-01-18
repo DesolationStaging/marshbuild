@@ -88,7 +88,7 @@ $(info   TARGET_NDK_GCC_VERSION=$(TARGET_NDK_GCC_VERSION))
 ifdef TARGET_GCC_VERSION_ARM
 $(info   TARGET_KERNEL_TOOLCHAIN=$(TARGET_GCC_VERSION_ARM))
 else
-$(info   TARGET_KERNEL_TOOLCHAIN=$(TARGET_GCC_VERSION))
+$(info   TARGET_KERNEL_TOOLCHAIN=4.9-uber)
 endif
 $(info =======================================================)
 endif
