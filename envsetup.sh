@@ -612,6 +612,8 @@ function lunch()
     export TARGET_BUILD_APPS=
 
     local product=$(echo -n $selection | sed -e "s/-.*$//")
+    local device_product=$(echo -n $selection | sed -e "s/deso_//" | sed -e "s/-.*$//")
+    local device_path=$(find device/ -type d -name $device_product | head -n 1)
     check_product $product
     if [ $? -ne 0 ]
     then
@@ -622,7 +624,7 @@ function lunch()
         popd > /dev/null
         check_product $product
     else
-        build/tools/roomservice.py $product true
+        build/tools/roomservice.py $device_product true $device_path
     fi
     if [ $? -ne 0 ]
     then

@@ -316,9 +316,12 @@ def main():
 
     product = sys.argv[1]
     device = product[product.find("_") + 1:] or product
-
     if depsonly:
-        repo_path = get_from_manifest(device)
+        try:
+            repo_path = sys.argv[3]
+        except IndexError:
+            repo_path = get_from_manifest(device)
+ 
         if repo_path:
             fetch_dependencies(repo_path)
         else:
