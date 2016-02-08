@@ -29,7 +29,41 @@ export HMM_DESCRIPTIVE=(
 "repopick: Utility to fetch changes from Gerrit."
 "installboot: Installs a boot.img to the connected device."
 "installrecovery: Installs a recovery.img to the connected device."
+"gcp: Cherry picks a commit from a github commit url"
 )
+
+function isArch() {
+    if grep -i -q Arch /etc/issue; then
+        echo -e "This is an Arch-based distribution."
+        echo -e "Going to assume the link to python2 is in /opt/android."
+        export PATH=$PATH:/opt/android
+    fi
+}
+
+isArch
+
+function gcp() {
+    COMMIT=`echo "$1" | cut -d/ -f1-5`
+    GH=`echo "$1" | cut -d/ -f1-3`
+    if [ "$COMMIT" != "commit" ]
+    then
+        echo -e "Please use a commit url"
+        return
+    fi
+
+    if [ "$GH" != "https://github.com" ]
+    then
+        echo -e "Please use a github url"
+        return
+    fi
+
+    PROJECT=`echo "$1" | cut -d/ -f1-5`
+    git fetch $PROJECT
+
+    CP=`echo "$1" | cut -d/ -f7`
+    git cherry-pick $CP
+    return
+}
 
 function hmm() {
     T=$(gettop)
